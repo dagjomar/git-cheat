@@ -54,6 +54,16 @@ suggest_open_command() {
   fi
 }
 
+default_export_dir() {
+  if [ -d "$HOME/Downloads" ]; then
+    printf '%s/Downloads\n' "$HOME"
+  elif [ -d "$HOME/Desktop" ]; then
+    printf '%s/Desktop\n' "$HOME"
+  else
+    printf '%s\n' "$HOME"
+  fi
+}
+
 open_file_in_default_editor() {
   local target_file="$1"
   mkdir -p "$(dirname "$target_file")"
@@ -106,6 +116,7 @@ Notes:
       # cheat: description
   - Global aliases are included by default.
   - Add project folders to include their local .git/config aliases.
+  - Without [output-file], exports go to ~/Downloads (or ~/Desktop, or ~).
   - First time? Run `git cheat edit` for a guided setup flow.
 EOF
 }
@@ -926,12 +937,12 @@ cmd_export() {
 
   case "$format" in
     md|markdown)
-      output_file="${output_file:-git-cheat-sheet.md}"
+      output_file="${output_file:-$(default_export_dir)/git-cheat-sheet.md}"
       write_markdown_output "$rows_file" "$output_file"
       ok "Markdown cheat sheet written: $output_file"
       ;;
     html)
-      output_file="${output_file:-git-cheat-sheet.html}"
+      output_file="${output_file:-$(default_export_dir)/git-cheat-sheet.html}"
       write_html_output "$rows_file" "$output_file"
       ok "HTML cheat sheet written: $output_file"
       suggest_open_command "$output_file"

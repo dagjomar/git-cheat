@@ -1,6 +1,8 @@
 # Git Cheat
 ## A lightweight CLI cheat sheet generator for your favorite git aliases
 
+<img src="git-cheat-sheet-preview-image.png" alt="Git Cheat Sheet preview" width="600">
+
 Git Cheat turns your git alias config into a cheat sheet you can read in the terminal or export to markdown or html.
 
 It is designed for exactly the workflow you described:
@@ -125,7 +127,7 @@ git cheat export html ./git-cheat-sheet.html
 ```
 
 Notes:
-- If output path is omitted, defaults (`git-cheat-sheet.md` / `git-cheat-sheet.html`) are used in the current directory.
+- If output path is omitted, the file is saved to `~/Downloads` (falling back to `~/Desktop`, then `~`).
 - After an html export the script prints the right `open` command for your platform so you can preview it immediately.
 
 ## Config file format
